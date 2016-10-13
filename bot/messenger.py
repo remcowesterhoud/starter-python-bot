@@ -61,3 +61,7 @@ class Messenger(object):
             "color": "#7CD197",
         }
         self.clients.web.chat.post_message(channel_id, txt, attachments=[attachment], as_user='true')
+        
+    def time_foosball(self, channel_id):
+        txt = "It is always time for foosball!"
+        self.send_message(channel_id, txt)
