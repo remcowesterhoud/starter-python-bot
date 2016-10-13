@@ -91,7 +91,7 @@ class Messenger(object):
         self.send_message(channel_id, time)
 
     def traffic_info(self, channel_id, user_id):
-        if 'remco' in user_id:
+        if 'U2NQHH8TG' in user_id:
             orig_coord = "52.040381,5.535294"
             dest_coord = "52.057345,4.328507"
             url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&mode=driving&language=en-EN&sensor=false".format(str(orig_coord),str(dest_coord))
