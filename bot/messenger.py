@@ -68,16 +68,16 @@ class Messenger(object):
         #Increase time by 2 hours to fix timezone differences
         time = time.replace(hour = time.hour + 2)
         txt = "I forgot my watch so I don't know the time. You decide yourself if it's time to play."
-        if time.hour < 11:
+        if time.hour <= 11:
             txt = "Keep working you lazy twat. It's not even close to foosball time!"
         elif time.hour < 12:
             if time.minutes <= 30:
                 txt = "Shouldn't you be worried about the daily stand-up first?"
             else:
                 txt = "Already done with the stand-up huh? Sure, have a little game of foosball."
-        elif time.hour > 12 and time.hour < 13:
+        elif time.hour >= 12 and time.hour < 13:
                 txt = "Prime time! What're you waiting for? IT'S FOOSBALL TIME!"
-        elif time.hour > 13 and time.hour < 14:
+        elif time.hour >= 13 and time.hour <= 14:
             txt = "You've missed your chance. Keep working!"
         elif time.hour < 15:
             txt = "Almooooooooost."
