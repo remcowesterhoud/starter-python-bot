@@ -64,7 +64,23 @@ class Messenger(object):
         self.clients.web.chat.post_message(channel_id, txt, attachments=[attachment], as_user='true')
         
     def time_foosball(self, channel_id):
-        txt = "It is always time for foosball!"
+        time = datetime.datetime.now()
+        txt = "I forgot my watch so I don't know the time. You decide yourself if it's time to play."
+        if time.hour < 11:
+            txt = "Keep working you lazy twat. It's not even close to foosball time!"
+        elif time.hour < 12:
+            if time.minutes <= 30:
+                txt = "Shouldn't you be worried about the daily stand-up first?"
+            else:
+                txt = "Already done with the stand-up huh? Sure, have a little game of foosball."
+        elif time.hour > 12 and time.hour < 13:
+                txt = "Prime time! What're you waiting for? IT'S FOOSBALL TIME!"
+        elif time.hour > 13 and time.hour < 14:
+            txt = "You've missed your chance. Keep working!"
+        elif time.hour < 15:
+            txt = "Almooooooooost."
+        else:
+            txt = "Nearing the end of the day. A little game won't hurt anyone."
         self.send_message(channel_id, txt)
         
     def current_time(self, channel_id):
