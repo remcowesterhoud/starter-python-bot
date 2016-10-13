@@ -3,6 +3,8 @@
 import logging
 import random
 import datetime
+import urllib.request
+import simplejson
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +47,6 @@ class Messenger(object):
         answer = "To eat the chicken on the other side! :laughing:"
         self.send_message(channel_id, answer)
 
-
     def write_error(self, channel_id, err_msg):
         txt = ":face_with_head_bandage: my maker didn't handle this error very well:\n>```{}```".format(err_msg)
         self.send_message(channel_id, txt)
@@ -62,11 +63,11 @@ class Messenger(object):
             "color": "#7CD197",
         }
         self.clients.web.chat.post_message(channel_id, txt, attachments=[attachment], as_user='true')
-        
+
     def time_foosball(self, channel_id):
         time = datetime.datetime.now()
-        #Increase time by 2 hours to fix timezone differences
-        time = time.replace(hour = time.hour + 2)
+        # Increase time by 2 hours to fix timezone differences
+        time = time.replace(hour=time.hour + 2)
         txt = "I forgot my watch so I don't know the time. You decide yourself if it's time to play."
         if time.hour <= 11:
             txt = "Keep working you lazy twat. It's not even close to foosball time!"
@@ -76,7 +77,7 @@ class Messenger(object):
             else:
                 txt = "Already done with the stand-up huh? Sure, have a little game of foosball."
         elif time.hour >= 12 and time.hour < 13:
-                txt = "Prime time! What're you waiting for? IT'S FOOSBALL TIME!"
+            txt = "Prime time! What're you waiting for? IT'S FOOSBALL TIME!"
         elif time.hour >= 13 and time.hour <= 14:
             txt = "You've missed your chance. Keep working!"
         elif time.hour < 15:
@@ -84,7 +85,19 @@ class Messenger(object):
         else:
             txt = "Nearing the end of the day. A little game won't hurt anyone."
         self.send_message(channel_id, txt)
-        
+
     def current_time(self, channel_id):
         time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
         self.send_message(channel_id, time)
+
+    def traffic_info(self, channel_id, user_id):
+        if 'remco' in user_id:
+            orig_coord = "52.040381,5.535294"
+            dest_coord = "52.057345,4.328507"
+            url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&mode=driving&language=en-EN&sensor=false".format(str(orig_coord),str(dest_coord))
+            result = simplejson.load(urllib.request.urlopen(url))
+            driving_time = result['rows'][0]['elements'][0]['duration']['text']
+            self.send_message(channel_id, "If you leave now you should be home in approximately {}".format(driving_time))
+        else:
+            self.send_message(channel_id,
+                              "I'm sorry <@{}>, I don't have any traffic information for you :(".format(user_id))
