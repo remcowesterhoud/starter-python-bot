@@ -52,5 +52,7 @@ class RtmEventHandler(object):
                     self.msg_writer.send_message(event['channel'], msg_txt)
                 elif 'foosball' in msg_txt:
                     self.msg_writer.time_foosball(event['channel'])
+                elif 'time' in msg_txt:
+                    self.msg_writer.current_time(event['channel'])
                 else:
                     self.msg_writer.write_prompt(event['channel'])
