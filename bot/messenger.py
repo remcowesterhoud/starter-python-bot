@@ -101,3 +101,6 @@ class Messenger(object):
         else:
             self.send_message(channel_id,
                               "I'm sorry <@{}>, I don't have any traffic information for you :(".format(user_id))
+
+    def get_uid(self, channel_id, user_id):
+        self.send_message(channel_id, "Your user id is: {}".format(user_id))
