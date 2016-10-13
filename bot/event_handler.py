@@ -50,7 +50,7 @@ class RtmEventHandler(object):
                     self.msg_writer.demo_attachment(event['channel'])
                 elif 'echo' in msg_txt:
                     self.msg_writer.send_message(event['channel'], msg_txt)
-                elif 'foosball' in msg_text:
+                elif 'foosball' in msg_txt:
                     self.msg_writer.time_foosball(event['channel'])
                 else:
                     self.msg_writer.write_prompt(event['channel'])
