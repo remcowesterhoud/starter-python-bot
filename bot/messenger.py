@@ -64,9 +64,9 @@ class Messenger(object):
         self.clients.web.chat.post_message(channel_id, txt, attachments=[attachment], as_user='true')
         
     def time_foosball(self, channel_id):
-        #Increase time by 2 hours to fix timezone differences
-        datetime.hour += 2
         time = datetime.datetime.now()
+        #Increase time by 2 hours to fix timezone differences
+        time.hour += 2
         txt = "I forgot my watch so I don't know the time. You decide yourself if it's time to play."
         if time.hour < 11:
             txt = "Keep working you lazy twat. It's not even close to foosball time!"
