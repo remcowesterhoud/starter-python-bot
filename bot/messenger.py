@@ -69,4 +69,4 @@ class Messenger(object):
         
     def current_time(self, channel_id):
         time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
-        self.send_message(time)
+        self.send_message(channel_id, time)
