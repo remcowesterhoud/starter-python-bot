@@ -3,7 +3,7 @@
 import logging
 import random
 import datetime
-import urllib.request
+import urllib2
 import simplejson
 
 logger = logging.getLogger(__name__)
@@ -95,7 +95,7 @@ class Messenger(object):
             orig_coord = "52.040381,5.535294"
             dest_coord = "52.057345,4.328507"
             url = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&mode=driving&language=en-EN&sensor=false".format(str(orig_coord),str(dest_coord))
-            result = simplejson.load(urllib.request.urlopen(url))
+            result = simplejson.load(urllib2.urlopen(url))
             driving_time = result['rows'][0]['elements'][0]['duration']['text']
             self.send_message(channel_id, "If you leave now you should be home in approximately {}".format(driving_time))
         else:
