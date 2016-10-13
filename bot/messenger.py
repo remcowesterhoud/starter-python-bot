@@ -2,6 +2,7 @@
 
 import logging
 import random
+import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -65,3 +66,7 @@ class Messenger(object):
     def time_foosball(self, channel_id):
         txt = "It is always time for foosball!"
         self.send_message(channel_id, txt)
+        
+    def current_time(self, channel_id):
+        time = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d %H:%M:%S')
+        self.send_message(time)
