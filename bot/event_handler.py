@@ -61,6 +61,6 @@ class RtmEventHandler(object):
                 elif 'warn me' in msg_txt:
                     self.msg_writer.add_warning(event['channel'], event['user'])
                 elif 'warnings' in msg_txt:
-                    self.masg_writer.get_warnings(event['channel'], event['user'])
+                    self.msg_writer.get_warnings(event['channel'], event['user'])
                 else:
                     self.msg_writer.write_prompt(event['channel'])
