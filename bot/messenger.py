@@ -101,6 +101,8 @@ class Messenger(object):
             result = simplejson.load(urllib2.urlopen(url))
             driving_time = result['rows'][0]['elements'][0]['duration']['text']
             self.send_message(channel_id, "If you leave now you should be home in approximately {}".format(driving_time))
+        if 'U2NQF7L4Q' in user_id:
+            self.send_message("I can't be arsed to sign up for the NS API. Sorry :( (also they use XML...)")
         else:
             self.send_message(channel_id,
                               "I'm sorry <@{}>, I don't have any traffic information for you :(".format(user_id))
