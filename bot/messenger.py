@@ -110,7 +110,7 @@ class Messenger(object):
 
     def add_warning(self, channel_id, user_id):
         path = os.path.join(os.getcwd(), 'warnings.txt')
-        for line in fileinput.input(path, inpine=True):
+        for line in fileinput.input(path, inplace=True):
             if user_id in line:
                 user, warnings = line.split(":")
                 line.replace(warnings, int(warnings) + 1)
