@@ -125,7 +125,7 @@ class Messenger(object):
         for line in fileinput.input(path, inplace=True):
             if user_id in line:
                 user, warnings = line.split(":")
-                self.send_message(channel_id, "<@{}>, you have {} warnings.".format(user_id, warnings)
+                self.send_message(channel_id, "<@{}>, you have {} warnings.".format(user_id, warnings))
                 break
         else:
             self.send_message(channel_id, "Great job <@{}>! You don't have any warnings!".format(user_id))
