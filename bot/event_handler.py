@@ -50,7 +50,7 @@ class RtmEventHandler(object):
                     self.msg_writer.demo_attachment(event['channel'])
                 elif 'echo' in msg_txt:
                     self.msg_writer.send_message(event['channel'], msg_txt)
-                elif 'foosball' in msg_txt:
+                elif re.search('foosball|football|soccer|voetbal|tafelvoetbal' ,msg_txt):
                     self.msg_writer.time_foosball(event['channel'], event['user'])
                 elif 'time' in msg_txt:
                     self.msg_writer.current_time(event['channel'])
