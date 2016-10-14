@@ -113,7 +113,7 @@ class Messenger(object):
         for line in fileinput.input(path, inplace=True):
             if user_id in line:
                 user, warnings = line.split(":")
-                line.replace(warnings, int(warnings) + 1)
+                line.replace(warnings, str(int(warnings) + 1))
                 break
         else:
             with open(path, "a") as myfile:
