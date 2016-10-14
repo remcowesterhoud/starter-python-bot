@@ -120,4 +120,13 @@ class Messenger(object):
                 myfile.write(user_id + ":1")
         self.send_message(channel_id, "<@{}>, you have been warned!".format(user_id))
 
+    def get_warnings(self, channel_id, user_id):
+        path = os.path.join(os.getcwd(), 'warnings.txt')
+        for line in fileinput.input(path, inplace=True):
+            if user_id in line:
+                user, warnings = line.split(":")
+                self.send_message(channel_id, "<@{}>, you have {} warnings.".format(user_id, warnings)
+                break
+        else:
+            self.send_message(channel_id, "Great job <@{}>! You don't have any warnings!".format(user_id))
 
