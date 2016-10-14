@@ -51,12 +51,14 @@ class RtmEventHandler(object):
                 elif 'echo' in msg_txt:
                     self.msg_writer.send_message(event['channel'], msg_txt)
                 elif 'foosball' in msg_txt:
-                    self.msg_writer.time_foosball(event['channel'])
+                    self.msg_writer.time_foosball(event['channel'], event['user'])
                 elif 'time' in msg_txt:
                     self.msg_writer.current_time(event['channel'])
                 elif 'files' in msg_txt:
                     self.msg_writer.traffic_info(event['channel'], event['user'])
                 elif 'uid' in msg_txt:
                     self.msg_writer.get_uid(event['channel'], event['user'])
+                elif 'warn me' in msg_txt:
+                    self.msg_write.add_warning(event['channel'], event['user'])
                 else:
                     self.msg_writer.write_prompt(event['channel'])

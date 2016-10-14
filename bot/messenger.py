@@ -5,6 +5,8 @@ import random
 import datetime
 import urllib2
 import simplejson
+import os
+import fileinput
 
 logger = logging.getLogger(__name__)
 
@@ -64,13 +66,14 @@ class Messenger(object):
         }
         self.clients.web.chat.post_message(channel_id, txt, attachments=[attachment], as_user='true')
 
-    def time_foosball(self, channel_id):
+    def time_foosball(self, channel_id, user_id):
         time = datetime.datetime.now()
         # Increase time by 2 hours to fix timezone differences
         time = time.replace(hour=time.hour + 2)
         txt = "I forgot my watch so I don't know the time. You decide yourself if it's time to play."
         if time.hour <= 11:
             txt = "Keep working you lazy twat. It's not even close to foosball time!"
+            self.add_warning(channel_id, user_id)
         elif time.hour < 12:
             if time.minutes <= 30:
                 txt = "Shouldn't you be worried about the daily stand-up first?"
@@ -104,3 +107,17 @@ class Messenger(object):
 
     def get_uid(self, channel_id, user_id):
         self.send_message(channel_id, "Your user id is: {}".format(user_id))
+
+    def add_warning(self, channel_id, user_id):
+        path = os.path.join(os.getcwd(), 'warnings.txt')
+        for line in fileinput.input(path, inpine=True):
+            if user_id in line:
+                user, warnings = line.split(":")
+                line.replace(warnings, int(warnings) + 1)
+                break
+        else:
+            with open(path, "a") as myfile:
+                myfile.write(user_id + ":1")
+        self.send_message("<@{}>, you have been warned!".format(user_id))
+
+
