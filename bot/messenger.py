@@ -118,6 +118,7 @@ class Messenger(object):
         else:
             with open(path, "a") as myfile:
                 myfile.write(user_id + ":1")
+        fileinput.close()
         self.send_message(channel_id, "<@{}>, you have been warned!".format(user_id))
 
     def get_warnings(self, channel_id, user_id):
@@ -129,4 +130,5 @@ class Messenger(object):
                 break
         else:
             self.send_message(channel_id, "Great job <@{}>! You don't have any warnings!".format(user_id))
+        fileinput.close()
 
